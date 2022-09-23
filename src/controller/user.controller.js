@@ -37,7 +37,7 @@ const getAllUsers = async (req, res) => {
 };
 
 const getUserById = async (req, res) => {
-  const { id } = req.body;
+  const { id } = req.params;
   const user = await userService.getUserById(id);
 
   if (!user) {

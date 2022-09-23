@@ -10,8 +10,17 @@ const getUsers = async () => {
   return user;
 };
 
-const getUserById = async (_id) => {
-  
+const getUserById = async (id) => {
+  const user = await User.findOne({
+    attributes: {
+      exclude: ['password'],
+    },
+    where: {
+      id,
+    },
+  });
+
+  return user;
 };
 
 const createNewUser = async (newUser) => {
