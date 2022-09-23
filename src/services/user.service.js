@@ -10,6 +10,10 @@ const getUsers = async () => {
   return user;
 };
 
+const getUserById = async (_id) => {
+  
+};
+
 const createNewUser = async (newUser) => {
   await User.create({ ...newUser });
 };
@@ -17,4 +21,5 @@ const createNewUser = async (newUser) => {
 module.exports = {
   getUsers,
   createNewUser,
+  getUserById,
 };

@@ -8,4 +8,6 @@ route.post('/', userController.createNewUser);
 
 route.get('/', validateJWT, userController.getAllUsers);
 
+route.get('/:id', validateJWT, userController.getUserById);
+
 module.exports = route;
