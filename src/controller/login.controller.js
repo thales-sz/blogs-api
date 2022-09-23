@@ -10,12 +10,10 @@ const login = async (req, res) => {
     return res.status(400).json({ message: 'Some required fields are missing' });
   }
 
-  console.log(email);
-
   const user = await loginService.getUserByEmail(email);
 
   if (!user || user.password !== password) {
-    return res.status(400).json({ message: 'Invalid fields', user });
+    return res.status(400).json({ message: 'Invalid fields' });
   }
 
   const token = generateJWT(email);
