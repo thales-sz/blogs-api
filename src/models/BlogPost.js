@@ -8,7 +8,6 @@ const BlogPostModel = (sequelize, DataTypes) => {
     updated: { type: DataTypes.DATE, defaultValue: DataTypes.NOW }
   }, 
 	{
-		timestamps: false,
 		underscored: true,
 	});
 
