@@ -12,4 +12,6 @@ route.get('/:id', validateJWT, postController.getPostById);
 
 route.put('/:id', validateJWT, postController.updatePost);
 
+route.delete('/:id', validateJWT, postController.deletePost);
+
 module.exports = route;
