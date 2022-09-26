@@ -55,8 +55,25 @@ const getPostById = async (req, res) => {
   return res.status(404).json({ message: 'Post does not exist' });
 };
 
+const updatePost = async (req, res) => {
+  const { title, content } = req.body;
+  const id = await getUserId(req.headers.authorization);
+  const { user } = await postService.getPostById(req.params.id);
+
+  if (!(title && content)) {
+    return res.status(400).json({ message: 'Some required fields are missing' });
+  }
+
+  if (user.id === id) {
+    const editedPost = await postService.updatePost(title, content, id);
+    return res.status(200).json(editedPost);
+  }
+  return res.status(401).json({ message: 'Unauthorized user' });
+};
+
 module.exports = {
   createNewPost,
   getAllPosts,
   getPostById,
+  updatePost,
 };
