@@ -1,6 +1,6 @@
 const UserModel = (sequelize, DataTypes) => {
   const UserTable = sequelize.define('User', {
-    id: { type: DataTypes.INTEGER, primaryKey: true },
+    id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true, allowNull: false },
     displayName: DataTypes.STRING,
 		email: DataTypes.STRING,
 		password: DataTypes.STRING,
@@ -11,10 +11,10 @@ const UserModel = (sequelize, DataTypes) => {
 		underscored: true,
 	});
 
-	// UserTable.associate = (models) => {
-	// 	UserTable.belongsTo(models.classes, 
-	// 		{ foreignKey: 'idClass', as: 'class'});
-	// };
+	UserTable.associate = (models) => {
+		UserTable.hasMany(models.BlogPost, 
+			{ foreignKey: 'userId', as: 'posts'});
+	};
 
   return UserTable;
 };
