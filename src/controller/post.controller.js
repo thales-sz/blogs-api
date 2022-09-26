@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const { postService, categoriesService } = require('../services');
 const handleError = require('../utils/handleError');
+const { getUserId } = require('../utils/getUserId');
 
 const validateBody = Joi.object({
   title: Joi.string().required(),
@@ -35,7 +36,9 @@ const createNewPost = async (req, res) => {
     return res.status(400).json({ message: '"categoryIds" not found' });
   }
 
-  const newPost = await postService.createNewPost(req.body);
+  const id = await getUserId(req.headers.authorization);
+
+  const newPost = await postService.createNewPost(req.body, id);
   return res.status(201).json(newPost);
 };
 
