@@ -1,3 +1,0 @@
-const verifyCategory = (existingCategories, categories) => {
-  
-};
