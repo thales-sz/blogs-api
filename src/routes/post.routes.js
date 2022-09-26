@@ -8,4 +8,6 @@ route.post('/', validateJWT, postController.createNewPost);
 
 route.get('/', validateJWT, postController.getAllPosts);
 
+route.get('/:id', validateJWT, postController.getPostById);
+
 module.exports = route;
