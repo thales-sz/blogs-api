@@ -1,6 +1,7 @@
 const Joi = require('joi');
 const generateJWT = require('../utils/generateJWT');
 const { userService } = require('../services');
+const { getUserId } = require('../utils/getUserId');
 
 const validateUser = Joi.object({
   displayName: Joi.string().min(8).required(),
@@ -46,8 +47,20 @@ const getUserById = async (req, res) => {
   return res.status(200).json(user);
 };
 
+const deleteUser = async (req, res) => {
+  const user = await getUserId(req.headers.authorization);
+
+  if (!user) {
+    return res.status(404).json({ message: 'User does not exist' });
+  }
+
+  await userService.deleteUser(user.id);
+  return res.sendStatus(204);
+};
+
 module.exports = {
   createNewUser,
   getAllUsers,
   getUserById,
+  deleteUser,
 };
