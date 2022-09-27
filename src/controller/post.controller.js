@@ -36,9 +36,9 @@ const createNewPost = async (req, res) => {
     return res.status(400).json({ message: '"categoryIds" not found' });
   }
 
-  const id = await getUserId(req.headers.authorization);
+  const user = await getUserId(req.headers.authorization);
 
-  const newPost = await postService.createNewPost(req.body, id);
+  const newPost = await postService.createNewPost(req.body, user.id);
   return res.status(201).json(newPost);
 };
 
@@ -87,10 +87,18 @@ const deletePost = async (req, res) => {
   return res.status(401).json({ message: 'Unauthorized user' });
 };
 
+const getPostBySearchTerm = async (req, res) => {
+  const { q } = req.query;
+
+  const search = await postService.getPostBySearchTerm(q);
+  res.status(200).json({ search });
+};
+
 module.exports = {
   createNewPost,
   getAllPosts,
   getPostById,
   updatePost,
   deletePost,
+  getPostBySearchTerm,
 };

@@ -8,6 +8,8 @@ route.post('/', validateJWT, postController.createNewPost);
 
 route.get('/', validateJWT, postController.getAllPosts);
 
+route.get('/search', validateJWT, postController.getPostBySearchTerm);
+
 route.get('/:id', validateJWT, postController.getPostById);
 
 route.put('/:id', validateJWT, postController.updatePost);
