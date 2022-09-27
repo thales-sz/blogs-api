@@ -91,7 +91,8 @@ const getPostBySearchTerm = async (req, res) => {
   const { q } = req.query;
 
   const search = await postService.getPostBySearchTerm(q);
-  res.status(200).json({ search });
+
+  res.status(200).json(search);
 };
 
 module.exports = {
